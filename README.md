@@ -10,16 +10,16 @@ child nodes- tree traversal algorithms can be applied to get the path to each le
 
 In my script a stack is used for depth-first traversal of the JSON object. 
 
-The approach taken in this script is as follows:
-    * Initialise the stack with level 1 JSON keys
-    * while the stack is not empty:
-        * pop an element from the stack
-        * if element has child nodes, add the child node and the path to child node to the stack
-        * if element has no child node, add the key/value pair to the output JSON
+### The approach taken in this script is as follows:
+* Initialise the stack with level 1 JSON keys
+* while the stack is not empty:
+    * pop an element from the stack
+    * if element has child nodes, add the child node and the path to child node to the stack
+    * if element has no child node, add the key/value pair to the output JSON
 
 ### Assumes the following:
-    * Input is a JSON object in text format following  [IETF RFC 8259] (https://datatracker.ietf.org/doc/rfc8259/)
-    * JSON object does not contain arrays
+* Input is a JSON object in text format following  [IETF RFC 8259] (https://datatracker.ietf.org/doc/rfc8259/)
+* JSON object does not contain arrays
 
 ### Example input and output for the script:
 
