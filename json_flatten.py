@@ -1,11 +1,6 @@
-import json
-import sys
-
-from collections import deque
-
 """ JSON conversion to flattened JSON
 
-This script allows the user to convert a JSON passed as a commandline input 
+This script allows the user to convert a JSON passed as a commandline input
 into a flattened JSON object.
 
 The script requires a valid JSON to be passed without arrays
@@ -16,7 +11,13 @@ This file can be imported as a module and contains the following functions:
         * main - main funtion of the script
 
 Author: Mahnoor Malik
-""" 
+"""
+
+# pylint: disable=redefined-outer-name
+
+import json
+
+from collections import deque
 
 def json_flatten(json_unflattened: str) -> str:
     """ Converts JSON objects to a flattened JSON object
@@ -30,12 +31,12 @@ def json_flatten(json_unflattened: str) -> str:
     -------
     str
         A flattened JSON object
-    
+
     Raises
     ------
     ValueError
         If the passed JSON object is not valid
-    
+
     """
 
     try:
@@ -46,12 +47,12 @@ def json_flatten(json_unflattened: str) -> str:
 
         json_input = json.loads(json_unflattened)
 
-        #stack initialisation 
+        #stack initialisation
         #stack tuple format: (path to key, key, value)
         for key, value in json_input.items():
             stack.append((None, key, value))
 
-        #stack traversal: pops the top key and appends the element to 
+        #stack traversal: pops the top key and appends the element to
         #output if no child node otherwise adds the children to stack
         while stack:
 
@@ -63,7 +64,6 @@ def json_flatten(json_unflattened: str) -> str:
 
             if isinstance(value, dict):
                 new_path = path_to_key + "." + key if (path_to_key is not None) else key
-                
                 for k, val in value.items():
                     stack.append((new_path, k, val))
             else:
