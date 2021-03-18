@@ -37,8 +37,14 @@ class TestJSONFlattenMethod(unittest.TestCase):
     test_base_case_json
         Tests JSON with one key value pair
 
+    test_embedded_json
+        Tests JSON with child node
+
     test_invalid_json
-        Tests an invalid JSON object 
+        Tests an invalid JSON object
+
+    test_long_json
+        Tests a sample JSON taken from (https://json.org/example.html) 
     """
 
     def test_example_json(self):
@@ -64,7 +70,7 @@ class TestJSONFlattenMethod(unittest.TestCase):
     def test_invalid_json(self):
         json_data = '{ "a": {"b" : true }'
         json_flattened = json_flatten(json_data)
-        self.assertEqual(json_flattened[0], 404)
+        self.assertEqual(json_flattened[0], 400)
 
     def test_long_json(self):
         json_data = '{ "glossary": { "title": "example glossary", "GlossDiv": { "title": "S", "GlossList": { "GlossEntry": { "ID": "SGML", "SortAs": "SGML", "GlossTerm": "Standard Generalized Markup Language", "Acronym": "SGML", "Abbrev": "ISO 8879:1986", "GlossDef": { "para": "A meta-markup language, used to create markup languages such as DocBook.", "GlossSeeAlso": "GML" }, "GlossSee": "markup" } } } } }'

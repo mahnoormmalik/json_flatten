@@ -76,7 +76,7 @@ def json_flatten(json_unflattened: str) -> str:
 
     except ValueError:
         print("Error while decoding JSON. Please pass a valid JSON object")
-        return 404, "Error while parsing"
+        return 400, "Error while parsing"
 
 if __name__ == "__main__":
     json_unflattened = input()
