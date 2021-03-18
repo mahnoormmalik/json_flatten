@@ -18,7 +18,7 @@ In my script a stack is used for depth-first traversal of the JSON object.
     * if element has no child node, add the key/value pair to the output JSON
 
 ### Assumes the following:
-* Input is a JSON object in text format following  [IETF RFC 8259] (https://datatracker.ietf.org/doc/rfc8259/)
+* Input is a JSON object in text format following  [IETF RFC 8259](https://datatracker.ietf.org/doc/rfc8259/)
 * JSON object does not contain arrays
 
 ### Example input and output for the script:
