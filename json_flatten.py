@@ -21,10 +21,6 @@ Author: Mahnoor Malik
 def json_flatten(json_unflattened: str) -> str:
     """ Converts JSON objects to a flattened JSON object
 
-    Assumes the following:
-        - Input is a JSON object in text format following 
-        - JSON object does not contain arrays
-
     Parameters
     ----------
     json_flattened : str
@@ -44,36 +40,43 @@ def json_flatten(json_unflattened: str) -> str:
 
     try:
         json_output = {}
+
+        #stack used to traverse the JSON depth-first
         stack = deque()
 
         json_input = json.loads(json_unflattened)
+
+        #stack initialisation 
+        #stack tuple format: (path to key, key, value)
         for key, value in json_input.items():
             stack.append((None, key, value))
 
-        stack.reverse()
+        #stack traversal: pops the top key and appends the element to 
+        #output if no child node otherwise adds the children to stack
         while stack:
 
             curr_element = stack.pop()
 
-            path = curr_element[0]
+            path_to_key = curr_element[0]
             key = curr_element[1]
             value = curr_element[2]
 
             if isinstance(value, dict):
-                new_path = path + "." + key if (path is not None) else key
+                new_path = path_to_key + "." + key if (path_to_key is not None) else key
                 
                 for k, val in value.items():
                     stack.append((new_path, k, val))
             else:
-                if path is None:
+                if path_to_key is None:
                     json_output[key] = value
                 else:
-                    json_output[path + "." + key] = value
+                    json_output[path_to_key + "." + key] = value
 
         return json.dumps(json_output)
 
     except ValueError:
         print("Error while decoding JSON. Please pass a valid JSON object")
+        return 404, "Error while parsing"
 
 if __name__ == "__main__":
     json_unflattened = input()
